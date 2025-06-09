@@ -21,7 +21,7 @@ function expensesReducer(state, action){
             // Find the Item
             const updatableExpense = state[updatableExpenseIndex];
             // Update the Item with the data 
-            const updatedItem = [...updatableExpense, ...action.payload.data];
+            const updatedItem = {...updatableExpense, ...action.payload.expenseData};
             // Now fetch the expenses
             const updatedExpenses = [...state];
             // Set the new updated values 
@@ -35,7 +35,7 @@ function expensesReducer(state, action){
 function ExpensesContextProvider({children}){
     const [expensesState, dispatch ] = useReducer(expensesReducer, EXPENSES);
 
-    function addExpense({expenseData}){
+    function addExpense(expenseData){
         dispatch({type :'ADD', payload : expenseData});
     }
 
@@ -43,7 +43,7 @@ function ExpensesContextProvider({children}){
         dispatch({type :'DELETE', payload : id});
     }
 
-     function updateExpense(id,{expenseData}){
+     function updateExpense(id,expenseData){
         dispatch({type :'UPDATE', payload : {id, expenseData}});
     }
 
