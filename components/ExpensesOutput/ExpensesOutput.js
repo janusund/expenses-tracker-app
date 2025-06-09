@@ -4,10 +4,14 @@ import ExpensesList from './ExpensesList';
 import { GlobalStyles } from '../../constants/styles';
 
 /*Purpose : This component will list expenses for the last 7 days a Summary and a List */
-function ExpensesOutput({expenses,expensesPeriod}){
+function ExpensesOutput({expenses,expensesPeriod, fallBackText}){
+    let content =<Text style={styles.infoText}>{fallBackText}</Text>
+    if(expenses.length >0){
+        content =<ExpensesList expenses={expenses}/>
+    }
     return  (<View style={styles.container}>
         <ExpensesSummary periodName={expensesPeriod} expenses={expenses}/>
-        <ExpensesList expenses={expenses}/>
+        {content}
     </View>);
 }
 
@@ -21,5 +25,11 @@ const styles =StyleSheet.create({
         paddingHorizontal:24,
         backgroundColor: GlobalStyles.colors.primary700,
 
+    },
+    infoText:{
+        colot:'white',
+        fontsize: 16,
+        textAlign:'center',
+        marginTop: 32
     }
 });
