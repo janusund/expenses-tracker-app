@@ -4,6 +4,7 @@ import IconButton from '../components/UI/IconButton';
 import { GlobalStyles } from '../constants/styles';
 import Button from '../components/UI/Button';
 import { ExpensesContext } from '../store/context/expenses-context';
+import ExpenseForm from '../components/ManageExpense/ExpenseForm';
 
 function ManageExpense({route,navigation}){
     // If new expense then there will be no id 
@@ -38,6 +39,7 @@ function ManageExpense({route,navigation}){
     }
     return (
       <View style={styles.container}>
+        <ExpenseForm/>
         <View style={styles.buttons}>
             <Button mode="flat"  style={styles.button} onPress={cancelExpenseHandler}>Cancel</Button>
             <Button mode="flat" style={styles.button} onPress={confirmExpenseHandler}>{isEditing? 'Update' : 'Add'}</Button>
