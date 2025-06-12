@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
     },
     button:{
         minWidth:120,
-        marginHorizontal:8
+        marginHorizontal:8,
+        backgroundColor:'white'
     },
     deleteContainer:{
         marginTop:16,
