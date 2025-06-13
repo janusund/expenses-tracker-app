@@ -2,7 +2,7 @@ import {Text, View, StyleSheet} from 'react-native';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import {useState} from 'react';
-function ExpenseForm({onCancel,submitButtonLabel,isEditing}){
+function ExpenseForm({onCancel,submitButtonLabel,onSubmit}){
     const [inputValues, setInputValues] = useState({
         amount:'',
         date:'',
@@ -20,12 +20,13 @@ function ExpenseForm({onCancel,submitButtonLabel,isEditing}){
     }
 
       function submitHandler() {
-        if(isEditing){
-            expensesCtx.updateExpense(editedExpenseId,{description:"Test", amount:19.99, date: new Date('2022-06-01')});
-        }else{
-            expensesCtx.addExpense({description:"Test", amount:19.99, date: new Date('2022-06-03')});
-        }
-      navigation.goBack();
+        const expenseData ={
+            amount: +inputValues.amount,
+            date : new Date(inputValues.date),
+            description: inputValues.description
+        };
+
+        onSubmit(expenseData);
     }
 
 
