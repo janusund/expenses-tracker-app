@@ -2,6 +2,7 @@ import {Text, View, StyleSheet, Alert} from 'react-native';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import {useState} from 'react';
+import { GlobalStyles } from '../../constants/styles';
 function ExpenseForm({onCancel,submitButtonLabel,onSubmit, defaultValues}){
     const [inputs, setInputs] = useState({
         amount:{value :defaultValues?.amount?.toString(), isValid : true},
@@ -55,6 +56,7 @@ function ExpenseForm({onCancel,submitButtonLabel,onSubmit, defaultValues}){
           <Input
             style={styles.rowInput}
             label="Amount"
+            invalid={!inputs.amount.isValid}
             textInputConfig={{
               keyboardType: "decimal-pad",
               onChangeText: inputChangeHandler.bind(this, "amount"),
@@ -64,6 +66,7 @@ function ExpenseForm({onCancel,submitButtonLabel,onSubmit, defaultValues}){
           <Input
             style={styles.rowInput}
             label="Date"
+            invalid={!inputs.date.isValid}
             textInputConfig={{
               placeholder: "YYYY-MM-DD",
               maxLength: 10,
@@ -74,15 +77,17 @@ function ExpenseForm({onCancel,submitButtonLabel,onSubmit, defaultValues}){
         </View>
         <Input
           label="Description"
+          invalid={!inputs.description.isValid}
           textInputConfig={{
             multiline: true,
+             
             // autoCapitalize : 'none'
             // autoCorrect :false // default
             onChangeText: inputChangeHandler.bind(this, "description"),
             value: inputs.description.value,
           }}
         />
-        {formIsInValid && <Text>Invalid input values - please check your enetered data</Text>}
+        {formIsInValid && <Text style={styles.errorText}>Invalid input values - please check your enetered data</Text>}
         <View style={styles.buttons}>
           <Button
             mode="flat"
@@ -136,4 +141,9 @@ const styles = StyleSheet.create({
         marginHorizontal:8,
         backgroundColor:'white'
     },
+    errorText:{
+        textAlign:'center',
+        color:GlobalStyles.colors.error500,
+        margin:8
+    }
 })
