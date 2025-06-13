@@ -4,9 +4,9 @@ import Button from '../UI/Button';
 import {useState} from 'react';
 function ExpenseForm({onCancel,submitButtonLabel,onSubmit, defaultValues}){
     const [inputs, setInputs] = useState({
-        amount:{value :defaultValues?.amount?.toString(), isValid : defaultValues? true: false},
-        date:{value :defaultValues?.date?.toISOString().slice(0,10), isValid : !!defaultValues},
-        description:{value :defaultValues?.description, isValid : defaultValues? true: false}
+        amount:{value :defaultValues?.amount?.toString(), isValid : true},
+        date:{value :defaultValues?.date?.toISOString().slice(0,10), isValid: true},
+        description:{value :defaultValues?.description, isValid : true}
     });
     // First is the second parameter being passed 
     function inputChangeHandler(inputIdentifier,enteredValue){
