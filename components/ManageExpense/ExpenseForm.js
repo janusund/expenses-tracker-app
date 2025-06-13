@@ -2,11 +2,11 @@ import {Text, View, StyleSheet} from 'react-native';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import {useState} from 'react';
-function ExpenseForm({onCancel,submitButtonLabel,onSubmit}){
+function ExpenseForm({onCancel,submitButtonLabel,onSubmit, defaultValues}){
     const [inputValues, setInputValues] = useState({
-        amount:'',
-        date:'',
-        description:''
+        amount:defaultValues?.amount?.toString(),
+        date:defaultValues?.date?.toISOString().slice(0,10),
+        description:defaultValues?.description
     });
     // First is the second parameter being passed 
     function inputChangeHandler(inputIdentifier,enteredValue){
