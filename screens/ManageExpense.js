@@ -30,6 +30,7 @@ function ManageExpense({route,navigation}){
             expensesCtx.updateExpense(editedExpenseId,expenseData);
         }else{
             expensesCtx.addExpense(expenseData);
+           
         }
       navigation.goBack();
     }
