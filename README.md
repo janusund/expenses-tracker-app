@@ -36,6 +36,7 @@ A simple React Native app to tracker expenses<br/>
 
 ## Tech Stack<br/>
 React Native<br/>
+Expo <br/>
 
 ## Installation<br/>
 git clone this repo<br/>
