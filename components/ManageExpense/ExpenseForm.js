@@ -22,13 +22,13 @@ function ExpenseForm({onCancel,submitButtonLabel,onSubmit, defaultValues}){
 
       function submitHandler() {
         const expenseData ={
-            amount: +inputs.amount,
-            date : new Date(inputs.date),
-            description: inputs.description
+            amount: inputs.amount,
+            date : inputs.date,
+            description: inputs.description,
         };
-        const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount >0;
-        const dateIsvalid = expenseData.date.toString() !=='Invalid Date' ;
-        const descIsValid = expenseData.description.length >0;
+        const amountIsValid = !isNaN(expenseData.amount.value) && expenseData.amount.value >0;
+        const dateIsvalid = expenseData.date.value.toString() !=='Invalid Date' ;
+        const descIsValid = expenseData.description.value.length >0;
         if(!amountIsValid || !dateIsvalid || !descIsValid){
             setInputs((currInputs)=>{
                 return{
@@ -40,7 +40,10 @@ function ExpenseForm({onCancel,submitButtonLabel,onSubmit, defaultValues}){
             return;
             
         }
-        onSubmit(expenseData);
+        onSubmit({amount: +expenseData.amount.value,
+            date: new Date(expenseData.date.value),
+            description: expenseData.description.value,
+        });
     }
 
     const formIsInValid=

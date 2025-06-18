@@ -5,6 +5,7 @@ import { GlobalStyles } from '../constants/styles';
 import Button from '../components/UI/Button';
 import { ExpensesContext } from '../store/context/expenses-context';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
+import {storeExpense} from '../Util/http';
 
 function ManageExpense({route,navigation}){
     // If new expense then there will be no id 
@@ -30,7 +31,7 @@ function ManageExpense({route,navigation}){
             expensesCtx.updateExpense(editedExpenseId,expenseData);
         }else{
             expensesCtx.addExpense(expenseData);
-           
+            storeExpense(expenseData);
         }
       navigation.goBack();
     }
