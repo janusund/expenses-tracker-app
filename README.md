@@ -1,56 +1,92 @@
-## Simple Expense App<br/>
-A simple React Native app to tracker expenses<br/>
+# Simple Expense App
+
+A simple yet functional React Native application for tracking personal expenses. Built using Expo, Firebase, and React Navigation, it offers a modular architecture and real-time data capabilities.
+
+---
+
+## ✨ Features
+
+- **React Navigation Integration**  
+  Utilizes [React Navigation](https://reactnavigation.org/docs/getting-started) for seamless screen transitions and navigation logic.
+
+- **Navigation Container Setup**  
+  Wraps all navigation components using [Navigation Container](https://reactnavigation.org/docs/navigation-container/):  
+  ```bash
+  npm install @react-navigation/native  
+  npx expo install react-native-screens react-native-safe-area-context
+  ```
+
+- **Native Stack Navigators**  
+  Implements stack-based navigation via [Native Stack](https://reactnavigation.org/docs/native-stack-navigator):  
+  ```bash
+  npm install @react-navigation/native-stack
+  ```
+
+- **Bottom Tab Navigation**  
+  Adds intuitive tab navigation using [Bottom Tabs](https://reactnavigation.org/docs/bottom-tab-navigator):  
+  ```bash
+  npm install @react-navigation/bottom-tabs  
+  npx expo install react-native-gesture-handler react-native-reanimated
+  ```
+
+- **Expense Tracking Flows**  
+  - Manage Expense (default stack navigator)  
+  - List All Expenses  
+  - List Recent Expenses  
+  Navigators are nested for modular UI management.
+
+- **useLayoutEffect Hook**  
+  Dynamically updates screen elements such as titles and buttons.
+
+- **Context API**  
+  Stores and manages local state cleanly across components.
+
+- **Firebase Integration**  
+  Syncs data in real-time using [Firebase](https://firebase.google.com):
+  - New project and real-time database setup  
+  - Test-access rules enabled for development ease
+
+- **Axios for API Requests**  
+  Handles external calls with:  
+  ```bash
+  npm install axios
+  ```
+
+---
+
+## 🧱 Tech Stack
+
+- React Native  
+- Expo  
+- Firebase (Realtime Database)  
+- React Navigation  
+- Axios  
+
+---
+
+## 📸 Screenshots
 
 
 
-## Features<br/>
-<ul>
-    <li>Demonstrates use of navigation <a href="https://reactnavigation.org/docs/getting-started">React navigation</a></li>
-    <li>Installed Navigation container package listed under <a href="https://reactnavigation.org/docs/navigation-container/">Navigation Container</a> used 
-    as a wrapper for all other navigation components, to be installed with <br/>
-    npm install @react-navigation/native<br/>
-    npx expo install react-native-screens react-native-safe-area-context<br/>
-</li>
-    <li>Demonstrates use of Native Stack navigators listed under <a href="https://reactnavigation.org/docs/native-stack-navigator">Native Stack Navigators</a> to be installed using 
-    npm install @react-navigation/native-stack</li>
-    <li>Demonstrates use of Bottom Tab navigators listed under <a href="https://reactnavigation.org/docs/bottom-tab-navigator">Bottom tab Navigators</a>  to be installed using  
-    npm install @react-navigation/bottom-tabs<br/>
-    npx expo install react-native-gesture-handler react-native-reanimated</li>
-    <li>Features include Manage Expense , List ALl Expense , List Recent Expense. The Manange Expense will be the main navigator so listed as a default Stack navigator and other navigators are nested.</li>
-    <li>Demonstrates usage of useEffectLayout for updates to options of the screen for example title , button etc. </li>
-    <li>Use context api to store information locally</li>
-    <li>Use Fire base to store data and use restful apis <a href="firebase.google.com">FireBase</a>
-        <ul>
-            <li>Set up a new project  </li>
-            <li>Set up a new real time database under the project  </li>
-            <li>Set up rule to allow test access which is basically open to all  </li>
-        </ul>
-    </li>
-    <li> Install Axios for rest api access; npm install axios</li>
-    
-</ul>
+---
 
+## 🚀 Installation
 
-## ScreenShots<br/>
+```bash
+git clone <repository-url>
+cd <project-directory>
+npm install
+npm start
+```
 
+> **Note**: Ensure you have Node.js, Expo CLI, and either a mobile simulator or the Expo Go app installed.
 
-## Tech Stack<br/>
-React Native<br/>
-Expo <br/>
+---
 
-## Installation<br/>
-git clone this repo<br/>
-cd <DIRECTORY><br/>
-npm install<br/>
-npm start<br/>
-Note: You’ll need Node.js, Expo CLI, and a mobile simulator or Expo Go app.<br/>
+## 📁 Project Structure
 
-## Project Structure <br/>
-
-/components      # Reusable UI components <br/>
- 
-/App.js          # Entry point  <br/>
-
-/screens         # Screen layouts for Expense Tracker<br/>
-
-
+```
+/components       # Reusable UI components  
+/screens          # Screen layouts for Expense Tracker  
+/App.js           # App entry point  
+```
