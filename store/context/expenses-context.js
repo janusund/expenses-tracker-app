@@ -11,7 +11,7 @@ export const ExpensesContext = createContext({
 function expensesReducer(state, action){
     switch(action.type){
         case 'ADD':
-            const id = new Date().toString()+ Math.random().toString();
+            //const id = new Date().toString()+ Math.random().toString(); // remove this since firebase has an internal id
             return [{...action.payload, id: id},...state];
         case 'SET':
             // change the order since fire base stores the most recent one in the end of object set 

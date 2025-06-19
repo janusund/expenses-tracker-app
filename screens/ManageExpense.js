@@ -26,12 +26,13 @@ function ManageExpense({route,navigation}){
       navigation.goBack();
     }
 
-    function confirmExpenseHandler(expenseData) {
+    async function confirmExpenseHandler(expenseData) {
         if(isEditing){
             expensesCtx.updateExpense(editedExpenseId,expenseData);
         }else{
-            expensesCtx.addExpense(expenseData);
-            storeExpense(expenseData);
+            
+            const id = await storeExpense(expenseData); // returns a promise 
+            expensesCtx.addExpense({...expenseData, id:id});
         }
       navigation.goBack();
     }
