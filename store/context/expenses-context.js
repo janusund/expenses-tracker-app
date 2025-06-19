@@ -14,7 +14,9 @@ function expensesReducer(state, action){
             const id = new Date().toString()+ Math.random().toString();
             return [{...action.payload, id: id},...state];
         case 'SET':
-            return action.payload;
+            // change the order since fire base stores the most recent one in the end of object set 
+            const inverted = action.payload.reverse();
+            return inverted;
         case 'DELETE':
             return state.filter((expense) => expense.id != action.payload);
         case 'UPDATE':
