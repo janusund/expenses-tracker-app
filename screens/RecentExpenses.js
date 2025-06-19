@@ -4,16 +4,23 @@ import { ExpensesContext } from '../store/context/expenses-context';
 import { getDateMinusDays } from '../Util/date';
 import { useContext, useEffect, useState } from 'react';
 import {fetchExpenses} from '../Util/http';
+import LaodingOverlay from '../components/UI/LoadingOverlay';
 
 function RecentExpenses(){
+    const [isFetching, setIsFetcing] = useState(true);
       const expensesCtx = useContext(ExpensesContext);
         useEffect(() => {
             async function getExpenses(){
+                setIsFetcing(false); // used for show the loading overlay
                 const expenses = await fetchExpenses();
                 expensesCtx.setExpenses(expenses);
             }
             getExpenses();
         }, []);
+
+        if(isFetching){
+            return <LaodingOverlay/>
+        }
 
         const recentExpenses = expensesCtx.expenses.filter((expense)=> {
             const today = new Date();
