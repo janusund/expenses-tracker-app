@@ -86,6 +86,10 @@ npm start
 ## 📁 Project Structure
 
 ```
+/store            # For Context API
+/Util             # For Date formatting and axios http calls to firebase
+/data
+/constants
 /components       # Reusable UI components  
 /screens          # Screen layouts for Expense Tracker  
 /App.js           # App entry point  

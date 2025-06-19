@@ -19,7 +19,7 @@ export async function fetchExpenses(){
         id:key,
         amount: response.data[key].amount,
         date:new Date(response.data[key].date),
-        descrription:response.data[key].description
+        description:response.data[key].description
     }
     expenses.push(expenseObj)
    }
