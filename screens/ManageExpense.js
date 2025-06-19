@@ -5,10 +5,12 @@ import { GlobalStyles } from '../constants/styles';
 import { ExpensesContext } from '../store/context/expenses-context';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
 import {storeExpense, updateExpense, deleteExpense} from '../Util/http';
-import LaodingOverlay from '../components/UI/LoadingOverlay';
+import LoadingOverlay from '../components/UI/LoadingOverlay';
+import ErrorOverlay from '../components/UI/ErrorOverlay';
 
 function ManageExpense({route,navigation}){
     const [isSubmiting, setIsSubmiting] = useState(false);
+    const [error, setError] = useState();
     // If new expense then there will be no id 
     const editedExpenseId = route.params?.expenseId;
     const isEditing = !!editedExpenseId; // Convert to boolean
@@ -24,15 +26,20 @@ function ManageExpense({route,navigation}){
 
     async function deleteExpenseHandler() {
        setIsSubmiting(true);
+       try{
         expensesCtx.deleteExpense(editedExpenseId);
         await deleteExpense(editedExpenseId);
-        
-      navigation.goBack();
+         navigation.goBack();
+        }catch(error){
+           setError('Could not save date - please try again later!');
+          setIsSubmiting(false);
+       }
     }
 
     async function confirmExpenseHandler(expenseData) {
        setIsSubmiting(true);
-        if(isEditing){
+       try{
+         if(isEditing){
           //Update locally first then update backend
             expensesCtx.updateExpense(editedExpenseId,expenseData);
             await updateExpense(editedExpenseId, expenseData);
@@ -41,7 +48,13 @@ function ManageExpense({route,navigation}){
             const id = await storeExpense(expenseData); // returns a promise 
             expensesCtx.addExpense({...expenseData, id:id});
         }
-      navigation.goBack();
+        navigation.goBack();
+       }catch(error){
+          setError('Could not save date - please try again later!');
+          setIsSubmiting(false);
+       }
+       
+      
     }
 
     function cancelExpenseHandler(){
@@ -50,7 +63,14 @@ function ManageExpense({route,navigation}){
     }
 
     if(isSubmiting){
-      return <LaodingOverlay/>;
+      return <LoadingOverlay/>;
+    }
+
+     function errorHandler(){
+            setError(null);
+        }
+    if(error && !isSubmiting){
+      return <ErrorOverlay message={error} onConfirm={errorHandler}/>
     }
     return (
       <View style={styles.container}>
