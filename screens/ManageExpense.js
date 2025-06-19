@@ -5,6 +5,7 @@ import { GlobalStyles } from '../constants/styles';
 import { ExpensesContext } from '../store/context/expenses-context';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
 import {storeExpense, updateExpense, deleteExpense} from '../Util/http';
+import LaodingOverlay from '../components/UI/LoadingOverlay';
 
 function ManageExpense({route,navigation}){
     const [isSubmiting, setIsSubmiting] = useState(false);
@@ -30,6 +31,7 @@ function ManageExpense({route,navigation}){
     }
 
     async function confirmExpenseHandler(expenseData) {
+       setIsSubmiting(true);
         if(isEditing){
           //Update locally first then update backend
             expensesCtx.updateExpense(editedExpenseId,expenseData);
@@ -45,6 +47,10 @@ function ManageExpense({route,navigation}){
     function cancelExpenseHandler(){
         navigation.goBack();
 
+    }
+
+    if(isSubmiting){
+      return <LaodingOverlay/>;
     }
     return (
       <View style={styles.container}>
