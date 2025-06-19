@@ -5,7 +5,7 @@ import { GlobalStyles } from '../constants/styles';
 import Button from '../components/UI/Button';
 import { ExpensesContext } from '../store/context/expenses-context';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
-import {storeExpense} from '../Util/http';
+import {storeExpense, updateExpense, deleteExpense} from '../Util/http';
 
 function ManageExpense({route,navigation}){
     // If new expense then there will be no id 
@@ -21,14 +21,17 @@ function ManageExpense({route,navigation}){
       });
     }, [navigation, isEditing]);
 
-    function deleteExpenseHandler() {
+    async function deleteExpenseHandler() {
         expensesCtx.deleteExpense(editedExpenseId);
+        await deleteExpense(editedExpenseId);
       navigation.goBack();
     }
 
     async function confirmExpenseHandler(expenseData) {
         if(isEditing){
+          //Update locally first then update backend
             expensesCtx.updateExpense(editedExpenseId,expenseData);
+            await updateExpense(editedExpenseId, expenseData);
         }else{
             
             const id = await storeExpense(expenseData); // returns a promise 
