@@ -6,17 +6,16 @@ import { useContext, useEffect, useState } from 'react';
 import {fetchExpenses} from '../Util/http';
 
 function RecentExpenses(){
-      //  const expensesCtx = useContext(ExpensesContext);
-      const [fetchedExpenses, setFetchExpenses] = useState([]);
+      const expensesCtx = useContext(ExpensesContext);
         useEffect(() => {
             async function getExpenses(){
                 const expenses = await fetchExpenses();
-                setFetchExpenses(expenses);
+                expensesCtx.setExpenses(expenses);
             }
             getExpenses();
         }, []);
 
-        const recentExpenses = fetchedExpenses.filter((expense)=> {
+        const recentExpenses = expensesCtx.expenses.filter((expense)=> {
             const today = new Date();
             const dat7DaysAgo = getDateMinusDays(today, 7);
             return (expense.date >= dat7DaysAgo) && (expense.date <=today);
